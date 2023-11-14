@@ -78,7 +78,7 @@ var io = new IntersectionObserver(function (entries) {
   });
 }, {
   rootMargin: '0px',
-  threshold: 0.4
+  threshold: 0.3
 });
 
 var isUserScrolling = false;
