@@ -53,7 +53,7 @@ window.addEventListener('scroll', function () {
   const chk = document.getElementById('chk')
 }
 
-{var navbarButtonsBlocked = false;
+var navbarButtonsBlocked = false;
 
 function handleNavbarButtonClick() {
   navbarButtonsBlocked = true;
@@ -67,39 +67,46 @@ navbarButtons.forEach(function (button) {
   });
 });
 
-var io = new IntersectionObserver(function (entries) {
-  entries.forEach(function (entryImage) {
-    if (entryImage.isIntersecting && !navbarButtonsBlocked && isUserScrolling) {
-      console.log(entryImage.target.id);
-      requestAnimationFrame(function () {
-        location.hash = "#" + entryImage.target.id;
-      });
+function handleScroll() {
+  if (!navbarButtonsBlocked && isUserScrolling) {
+    var scrollOffset = window.innerHeight / 2.5; 
+
+    var targetSection = null;
+
+    
+    images.forEach(function (image) {
+      var rect = image.getBoundingClientRect();
+      var sectionCenter = rect.top + rect.height / 2;
+      var windowCenter = window.innerHeight / 2;
+
+      if (Math.abs(sectionCenter - windowCenter) <= scrollOffset) {
+        targetSection = image;
+      }
+    });
+
+    if (targetSection) {
+      console.log(targetSection.id);
+      location.hash = "#" + targetSection.id;
     }
-  });
-}, {
-  rootMargin: '0px',
-  threshold: 0.3
-});
+  }
+}
 
 var isUserScrolling = false;
 
 var images = document.querySelectorAll('.navbar, #header, #skills, #projects, #footer, section[id]');
-images.forEach(function (image) {
-  io.observe(image);
-});
 
 document.addEventListener('wheel', function (event) {
-  if (!navbarButtonsBlocked) {
-    isUserScrolling = true;
-    setTimeout(function () {
-      isUserScrolling = false;
-    }, 100); 
-  }
-});}
+  isUserScrolling = true;
+  setTimeout(function () {
+    isUserScrolling = false;
+    handleScroll();
+  }, 100);
+});
 
 document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('hashchange', function () {
     navbarButtonsBlocked = false;
   });
-});
 
+  window.addEventListener('scroll', handleScroll);
+});
