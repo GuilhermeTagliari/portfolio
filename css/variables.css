@@ -1,0 +1,14 @@
+:root {
+  --white: #ffffff;
+  --gray: #d9d9d9;
+  --black: #161616;
+  --primary-color: #6bb3af;
+  --secondary-color: #04fcef;
+  --tertiary-color: #00ffff;
+  --quaternary-color:var(--white);
+  --dark-secondary-color: #6bb3af;
+  --light-tertiary-color: #f3f6fb;
+  --text-color: #343d48;
+  background-color: #2a2a2a;
+  --font-family: 'Raleway', sans-serif;
+}

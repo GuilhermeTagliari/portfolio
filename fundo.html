@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+			width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url(assets/fundo2.png);
+			background-size: cover;
+    		background-position: center;
+            overflow: hidden;
+            filter: blur(0px);
+        }
+        .container {
+            font-size: 10px;
+            width: 40em;
+            height: 40em;
+            position: relative;
+            z-index: 1;
+        }
+        .sun {
+            position: absolute;
+            top: 15em;
+            left: 15em;
+            width: auto;
+            height: auto;
+            border-radius: 50%;
+        }
+        .earth, .moon {
+            position: absolute;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.39) transparent transparent transparent;
+            border-width: 0.1em 0.1em 0 0;
+            border-radius: 50%;
+        }
+        .earth {
+            top: 5em;
+            left: 5em;
+            width: 30em;
+            height: 30em;
+            animation: orbit 36.5s linear infinite;
+        }
+        .moon {
+            top: 0;
+            right: 0;
+            width: 8em;
+            height: 8em;
+            animation: orbit 2.7s linear infinite;
+        }
+        .earth::before, .moon::before {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+        }
+        .earth::before {
+            top: 2.8em;
+            right: 2.8em;
+            width: 3em;
+            height: 3em;
+        }
+        .moon::before {
+            top: 0.8em;
+            right: 0.2em;
+            left: 6.5em;
+            width: 1.2em;
+            height: 1.2em;
+        }
+        @keyframes orbit {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sun"></div>
+        <div class="earth">
+            <div class="moon"></div>
+        </div>
+    </div>
+</body>
+</html>
